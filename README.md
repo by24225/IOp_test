@@ -1,2 +1,2 @@
 # IOp
-inequality of opportunity (IOp) measurement and decomposition
+Inequality of opportunity (IOp) measurement and decomposition

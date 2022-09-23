@@ -40,7 +40,7 @@ iop <- R6Class(
                  set_engine("lm")
              )) %>% 
         add_recipe(
-          recipe(cformula(x = self$predictors, y = self$target), data = self$sample)
+          recipe(self$cformula(x = self$predictors, y = self$target), data = self$sample)
         ) %>% 
         fit(self$sample)
       
@@ -118,7 +118,7 @@ iop <- R6Class(
             prediction = self$workflow %>% 
               remove_recipe() %>% 
               add_recipe(
-                recipe(cformula(x = formula[[1]], y = self$target), data = task_1)
+                recipe(self$cformula(x = formula[[1]], y = self$target), data = task_1)
               ) %>% 
               fit(task_1) %>% 
               predict(new_data = task_1)
@@ -127,7 +127,7 @@ iop <- R6Class(
             prediction = self$workflow %>% 
               remove_recipe() %>% 
               add_recipe(
-                recipe(cformula(x = formula[[2]], y = self$target), data = task_2)
+                recipe(self$cformula(x = formula[[2]], y = self$target), data = task_2)
               ) %>% 
               fit(task_2) %>% 
               predict(new_data = task_2)

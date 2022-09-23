@@ -147,7 +147,7 @@ iop <- R6Class(
             self$Shapley_imp[[names(subgroups)[i]]] = self$Shapley_imp[[names(subgroups)[i]]] + change
           }
         }
-        print(sprintf("%s complete %s / %s", class(self$learner)[1], i, length(subgroups)))
+        print(sprintf("Completed %s / %s", i, length(subgroups)))
       }
       
       imp = unlist(self$Shapley_imp)

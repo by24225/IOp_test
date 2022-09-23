@@ -84,7 +84,7 @@ iop <- R6Class(
     }, 
     
     # Shapley decomposition
-    Shapley = function(sample = NULL, subgroups = NULL) {
+    Shapley = function(subgroups = NULL) {
       
       # create all the combinations and formulas
       target = self$target

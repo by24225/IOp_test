@@ -4,7 +4,7 @@ Inequality of opportunity (IOp) measurement and Shapley decomposition based on e
 It's able to use all the models in `tidymodels` for IOp measurement
 
 ## Usage
-`
+```
 IOp <- iop$new(sample = data, 
         target = "fincomeavg2", 
         predictors = circumstances, 
@@ -13,7 +13,7 @@ IOp$Shapley(subgroups = subgroups)
 
 IOp$iop
 IOp$Shapley_imp
-`
+```
 
 ## Dependency: 
 `tidyverse`, `tidymodels`, `DescTools`

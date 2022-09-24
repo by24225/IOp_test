@@ -11,22 +11,24 @@ library("R6")
 iop <- R6Class(
   "inequality of opportunity", 
   public = list(
-    sample     = NULL, 
-    target     = NULL, 
-    predictors = NULL, 
-    bootstrap  = NULL, 
-    measure    = NULL, 
-    workflow   = NULL, 
-    Shapley_imp = NULL, 
+    sample      = NULL, 
+    target      = NULL, 
+    predictors  = NULL, 
+    bootstrap   = NULL, 
+    measure     = NULL, 
+    workflow    = NULL, 
+    subgroups   = NULL, 
     
-    pred = NULL, 
-    iop  = NULL, 
+    pred        = NULL, 
+    iop         = NULL, 
+    Shapley_imp = NULL, 
+    results     = NULL, 
     
     initialize = function(sample = NULL, target = NULL, predictors = NULL, measure = NULL, 
                           bootstrap = NULL, subgroups = NULL, model = NULL) {
       stopifnot(!is.null(sample))
       
-      self$sample      = sample
+      self$sample      = sample %>% as_tibble()
       self$target      = target
       self$predictors  = predictors
       self$measure     = measure
@@ -48,6 +50,10 @@ iop <- R6Class(
       self$pred   = self$sample %>% select(self$target) %>% bind_cols(prediction)
       
       self$iop_measure()
+      if(!is.null(subgroups)) {
+        self$subgroups = subgroups
+        self$Shapley(subgroups = self$subgroups)
+      }
     }, 
     
     # measure
@@ -147,7 +153,7 @@ iop <- R6Class(
             self$Shapley_imp[[names(subgroups)[i]]] = self$Shapley_imp[[names(subgroups)[i]]] + change
           }
         }
-        print(sprintf("Completed %s / %s", i, length(subgroups)))
+        print(sprintf("complete %s / %s", i, length(subgroups)))
       }
       
       imp = unlist(self$Shapley_imp)
@@ -156,6 +162,7 @@ iop <- R6Class(
         self$Shapley_imp[i] = imp[[i]] / sum(imp)
       }
       names(self$Shapley_imp) = names(subgroups)
+      self$results = c(self$iop, self$Shapley_imp)
     }
   )
 )

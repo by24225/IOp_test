@@ -1,7 +1,7 @@
 # IOp
-Inequality of opportunity (IOp) measurement and Shapley decomposition based on each variable or groups of variables, with multiple inequality measure indexs.  
+Inequality of opportunity (IOp) measurement and Shapley decomposition based on each or groups of variables, with multiple inequality measure indexs.  
 
-It's able to use all the models in `tidymodels` for IOp measurement
+It's able to use all the models in `tidymodels` for IOp measurement.
 
 ## Usage
 ```
